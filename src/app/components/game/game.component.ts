@@ -92,7 +92,7 @@ export class GameComponent implements OnInit {
       word: this.word,
       attemptsLeft: this.attemptsLeft,
       score: this.getScore(),
-      date: new Date().toISOString(),
+      date: new Date().getDay() + '/' + new Date().getMonth() + '/' + new Date().getFullYear(),
       idGame: this.gameId,
     }
 

@@ -10,6 +10,7 @@ import { ApiService } from '../../services/api.service';
 })
 export class ScoresComponent implements OnInit {
   scores: Score[] = [];
+  title = '';
 
   constructor(
     private readonly apiService: ApiService
@@ -24,6 +25,7 @@ export class ScoresComponent implements OnInit {
     console.log(user);
     
     if (user.role === 'admin') {
+      this.title = 'Puntuaciones totales';
       this.apiService.getScores().subscribe({
         next: (response) => {
           this.scores = response
@@ -35,6 +37,7 @@ export class ScoresComponent implements OnInit {
       })
     }
     else {
+      this.title = 'Mis Puntuaciones';
       this.apiService.getScoresByUser(user.name!).subscribe({
         next: (response) => {
           this.scores = response
