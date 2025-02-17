@@ -1,0 +1,58 @@
+<section class="bg-dark">
+    <div class="container bg-light min-vh-100">
+        <h2 class="text-center">Juego del Ahorcado</h2>
+
+        <!-- Imagen del ahorcado -->
+        <div class="d-flex justify-content-center align-items-center">
+            <svg width="200" height="300">
+                <!-- Dibujo del personaje -->@if (attemptsLeft < 6) {
+                    <circle cx="150" cy="120" r="20" fill="black" /> <!--cabeza--->
+                }
+                @if (attemptsLeft < 5) {
+                    <line x1="150" y1="140" x2="150" y2="200" stroke="black" /> <!--cuerpo-->
+                }
+                @if (attemptsLeft < 4) {
+                    <line x1="150" y1="150" x2="130" y2="180" stroke="black" /> <!--brazo izquierdo-->
+                }
+                @if (attemptsLeft < 3) {
+                    <line x1="150" y1="150" x2="170" y2="180" stroke="black" /> <!--brazo derecho-->
+                }
+                @if (attemptsLeft < 2) {
+                    <line x1="150" y1="200" x2="130" y2="240" stroke="black" /> <!--pierna izquierda-->
+                }
+                @if (attemptsLeft < 1) {
+                    <line x1="150" y1="200" x2="170" y2="240" stroke="black" /> <!--pierna derecha-->
+                }
+            </svg>
+            
+        </div>
+
+        <!-- Progreso -->
+        <div class="d-flex justify-content-center align-items-center">
+            <p>
+                @for (letter of word; track $index) {
+                    {{letter === ' ' ? ' ' : (guessedLetters.includes(letter) ? letter : '_')}}
+                }
+            </p>
+        </div>
+
+        <!-- Teclado -->
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="row justify-content-center align-items-center w-50">
+                @for (key of keys; track $index) {
+                <div class="col-1 mb-1 text-center">
+                    <button type="button" class="btn" [ngClass]="getLetterClass(key)" (click)="submitLetter(key)">{{key}}</button>
+                </div>
+                }
+            </div>
+        </div>
+        @if (gameStatus) {
+            <div class="text-center mt-3">
+                <h3>{{gameStatus}}</h3>
+                <button class="btn btn-success text-center px-5" (click)="resetGame()">Reiniciar</button>
+            </div>
+        }
+        
+
+    </div>
+</section>
